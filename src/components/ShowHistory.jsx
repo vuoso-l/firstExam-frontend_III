@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import data from "../dataBase/data.json";
+import Button from './Button';
+import ReminderComponent from './ReminderComponent';
 
 class ShowHistory extends Component {
   constructor(props) {
@@ -7,7 +9,8 @@ class ShowHistory extends Component {
     this.state = {
       counter: 1,
       id: "",
-      history: [], options: {
+      history: [],
+      options: {
         a: "",
         b: "",
       },
@@ -55,27 +58,17 @@ class ShowHistory extends Component {
   }
 
   render() {
-    console.log(this.state);
-
     const { history, options, prevSelect, prevSelectHistory } = this.state;
 
-    return (<div className='layout'>
-      <h1 className='historia'>{history}</h1>
-      <div className='opciones'>
-        <div className='opcion'>
-          <button onClick={this.selectOption} id='a' className='botones'>A</button>
-          <h2>{options.a}</h2>
+    return (
+      <div className='layout'>
+        <h1 className='historia'>{history}</h1>
+        <div className='opciones'>
+          <Button selectOption={this.selectOption} options={options.a} id="a" />
+          <Button selectOption={this.selectOption} options={options.b} id="b" />
         </div>
-        <div className='opcion'>
-          <button onClick={this.selectOption} id='b' className='botones'>B</button>
-          <h2>{options.b}</h2>
-        </div>
-      </div>
-      <div className="recordatorio">
-        <h3>Selección anterior: {prevSelect.toUpperCase()}</h3>
-        <h4>Historial de opciones elegidas: <ul>{prevSelectHistory.map((el, index) => <li key={index + el}>{el.toUpperCase()}</li>)}</ul></h4>
-      </div>
-    </div>);
+        <ReminderComponent prevSelect={prevSelect} prevSelectHistory={prevSelectHistory} />
+      </div>);
   }
 }
 
