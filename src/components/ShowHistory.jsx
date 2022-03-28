@@ -2,21 +2,21 @@ import React, { Component } from 'react';
 import data from "../dataBase/data.json";
 import Button from './Button';
 import ReminderComponent from './ReminderComponent';
-
+import Swal from 'sweetalert2';
 class ShowHistory extends Component {
   constructor(props) {
     super(props);
     this.state = {
       counter: 1,
       id: "",
-      history: [],
+      history: "",
       options: {
         a: "",
         b: "",
       },
       prevSelect: "",
       prevSelectHistory: [],
-    }
+    };
   }
 
   componentDidMount() {
@@ -53,7 +53,11 @@ class ShowHistory extends Component {
         prevSelectHistory: [...this.state.prevSelectHistory, this.state.prevSelect],
       });
     } else {
-      alert("FIN");
+      Swal.fire({
+        title: "La aventura llegó a su fin!",
+        text: "Gracias por recorrerla!",
+        icon: 'warning',
+      });
     }
   }
 
